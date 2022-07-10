@@ -1,0 +1,115 @@
+<div class="container-fluid" *ngIf="showScreen">
+    <div class="row overflow-hidden">
+        <div class="col-12 p-0 col-md-4 transition">
+            <div class="user-list-card">
+                <div class="info">
+                    <img [src]="currentUser?.image" [alt]="currentUser?.name" class="avatar" />
+                    <p class="username">{{currentUser?.name}}</p>
+                    <fa-icon *ngIf="currentUser?.username==='joei'" class="tick" [icon]="faCheckCircle"></fa-icon>
+                </div>
+                <h3 class="contact my-1 text-secondary">مخاطبان</h3>
+                <div class="user-card" [ngClass]="user?.username === selectedUser?.username ? 'active' : ''" *ngFor="let user of userList" (click)="changeState()" (click)="selectUserHandler(user?.username)">
+                    <img [src]="user?.image" [alt]="user?.name" class="avatar" />
+                    <p class="username">{{user?.name}}</p>
+                    <fa-icon *ngIf="user?.username==='joei'" class="tick" [icon]="faCheckCircle"></fa-icon>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-12 p-0 col-md-8 d-sm-custom">
+            <div class="chat-container">
+                <ng-container *ngIf="selectedUser">
+                    <div class="chat-header">
+
+                        <img [src]="selectedUser?.image" [alt]="selectedUser?.name" class="avatar" />
+                        <p class="username">{{selectedUser?.name}}</p>
+                        <fa-icon *ngIf="selectedUser?.username==='joei'" class="tick" [icon]="faCheckCircle"></fa-icon>
+
+                    </div>
+
+                    <div class="chat-body">
+                        <div *ngFor="let item of messageArray" [ngClass]="item?.user === currentUser?.name ? 'same-user': '' ">
+                            <p class="message-container">{{item?.message}}</p>
+                        </div>
+                    </div>
+
+                    <div class="chat-footer">
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group mb-0">
+                                    <input type="text" placeholder="پیامی بنویسید" class="form-control" [(ngModel)]="messageText" (keyup)="$event.keyCode === 13 ? sendMessage():''" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-2 p-0 align-self-center">
+                                <img class="send" (click)="sendMessage()" src="assets/send.png" alt="send" title="send message">
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div [ngClass]="changeMobileState==true ? 'chat-state-right':'chat-state-left'" class="col-12 p-0 d-custom transition  position-absolute">
+            <div class="chat-container">
+                <ng-container *ngIf="selectedUser">
+                    <div class="chat-header">
+                        <fa-icon (click)="changeState()" class="back" [icon]="faChevronRight"></fa-icon>
+
+                        <img [src]="selectedUser?.image" [alt]="selectedUser?.name" class="avatar" />
+                        <p class="username">{{selectedUser?.name}}</p>
+                        <fa-icon *ngIf="selectedUser?.username==='joei'" class="tick" [icon]="faCheckCircle"></fa-icon>
+                    </div>
+                    <div class="chat-body">
+                        <div *ngFor="let item of messageArray" [ngClass]="item?.user === currentUser?.name ? 'same-user': '' ">
+                            <p class="message-container">{{item?.message}}</p>
+                        </div>
+                    </div>
+                    <div class="chat-footer">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="form-group mb-0">
+                                    <input type="text" placeholder="پیامی بنویسید" class="form-control" [(ngModel)]="messageText" (keyup)="$event.keyCode === 13 ? sendMessage():''" />
+                                </div>
+                            </div>
+                            <div style="width:0%" class="col-md-1 p-0 align-self-center">
+                                <img class="send" (click)="sendMessage()" src="assets/send.png" alt="send" title="send message">
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #popup let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title text-center">ورود</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <input type="text" placeholder="نام کاربری را وارد کنید" class="form-control logform" [(ngModel)]="username" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-primary" (click)="login(d)">ورود</button>
+    </div>
+    <div class="container mb-3 pt-3 list-container">
+        <h3 class="memebers  text-secondary">اعضا</h3>
+        <div class="my-1 mx-2 row justify-content-between alig-items-center">
+            <div *ngFor="let user of userList" class="col  align-items-center mx-1">
+                <img [src]="user?.image" [alt]="user?.name" class="image-list">
+                <p class="text-center mt-2 username-member">
+                    <fa-icon *ngIf="user?.username==='joei'" class="tick" [icon]="faCheckCircle"></fa-icon>
+                    {{ user.username}}
+                </p>
+
+            </div>
+        </div>
+    </div>
+</ng-template>
