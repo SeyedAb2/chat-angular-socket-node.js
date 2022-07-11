@@ -1,4 +1,4 @@
-# chat romm
+# chat rom
 ### Angular 13 + socket.io + node.js
 #### installation
 
