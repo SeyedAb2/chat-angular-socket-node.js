@@ -2,7 +2,7 @@
 ### Angular 13 + socket.io + node.js
 #### installation
 
-##### run local server
+##### run local server 
 ```
 cd backend
 npm i
