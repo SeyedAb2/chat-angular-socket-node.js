@@ -1,4 +1,4 @@
-# chat rom
+# chat room
 ![](https://github.com/SeyedAb2/chat-angular-socket-node.js/blob/master/frontend/src/assets/gif.gif)
 
 ### Angular 13 + socket.io + node.js
