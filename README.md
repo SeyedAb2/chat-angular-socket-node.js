@@ -1,5 +1,5 @@
 # chat romm
-### Angular13 + socket.io + node.js
+### Angular 13 + socket.io + node.js
 #### installation
 
 ##### run local server
